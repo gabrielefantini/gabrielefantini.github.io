@@ -12,6 +12,7 @@ export type ArtName =
   | 'contours'
   | 'rays'
   | 'ribbon'
+  | 'contexts'
   | 'banner';
 
 /** An illustration reference, e.g. `mesh-dark` or `flow-light`. */
@@ -21,9 +22,12 @@ export const profile = {
   name: 'Gabriele Fantini',
   shortName: 'Gabriele',
   role: 'Software Engineer',
-  headline: 'Building the tooling that makes data governable.',
+  eyebrow: 'Software engineer · Domain-driven design · AI in software engineering',
+  headline: 'From conversations to code.',
   tagline:
-    'I’m a software engineer working on data governance, data products and data mesh — at Blindata and in the Open Data Mesh Initiative.',
+    'I’m a software engineer who starts from the domain. I turn conversations with domain experts into models, models into clean architecture, and architecture into code — increasingly with AI in the loop.',
+  currently:
+    'Currently a software engineer at Blindata, a data governance platform, and a contributor to the open source platform of the Open Data Mesh Initiative.',
   email: 'gabrielefantini97@gmail.com',
   links: {
     github: 'https://github.com/gabrielefantini',
@@ -48,12 +52,12 @@ export const orgs: Org[] = [
   {
     id: 'blindata',
     name: 'Blindata',
-    kicker: 'Where I work · since 2022',
+    kicker: 'Software engineer · since 2022',
     summary:
       'A governance platform for the full lifecycle of the enterprise information architecture — from knowledge to data assets.',
     description: [
       'Blindata is an Italian SaaS platform that governs information architectures end to end: business glossary and ontologies, data catalog, lineage, data quality, data products and privacy compliance — all linked in a single knowledge graph.',
-      'As a software engineer I work on the platform that brings governance into the place where data is actually built: data products with standard descriptors, computational governance policies, and metadata that is ready to be used as context by Gen AI and agents.',
+      'It’s where I apply domain-driven thinking to data: data products with explicit contracts, governance policies that run as code, and governed metadata that AI assistants and agents can use as trusted context.',
     ],
     url: 'https://blindata.io',
     github: 'https://github.com/blindata',
@@ -84,7 +88,7 @@ export const orgs: Org[] = [
   {
     id: 'opendatamesh',
     name: 'Open Data Mesh Initiative',
-    kicker: 'Open source · specifications & platform',
+    kicker: 'Open source contributor',
     summary:
       'Open source software, standards and protocols to boost data mesh adoption. Sharing is caring.',
     description: [
@@ -143,31 +147,74 @@ export const orgs: Org[] = [
   },
 ];
 
-/** What I focus on — shown on the home page. */
-export const focusAreas: { title: string; text: string }[] = [
+/** How I work — the four pillars on the home page. */
+export const pillars: { title: string; text: string }[] = [
   {
-    title: 'Data products',
-    text: 'Describing data products declaratively with DPDS: ports, data contracts and infrastructure as one versioned descriptor.',
+    title: 'Collaborative modelling',
+    text: 'Domain storytelling and EventStorming to discover the real problem together with the people who know it — before a line of code is written.',
   },
   {
-    title: 'Data product lifecycle',
-    text: 'Platform services that register, scaffold, deploy and observe data products — the ODM registry, blueprint and DevOps flows.',
+    title: 'Domain-driven design',
+    text: 'Ubiquitous language, bounded contexts and aggregates: models that speak the language of the business and keep complexity where it belongs.',
   },
   {
-    title: 'Computational governance',
-    text: 'Turning governance rules into policies that run automatically, shifting checks left into the data product pipeline.',
+    title: 'Clean architecture',
+    text: 'Explicit boundaries, ports and adapters, and a core that doesn’t depend on frameworks — so the code stays testable and easy to change.',
   },
   {
-    title: 'Metadata & lineage',
-    text: 'Catalogs, glossaries and lineage linked in a knowledge graph, so every asset has meaning and provenance.',
+    title: 'Engineering with AI',
+    text: 'AI as a real collaborator across the loop — modelling sessions, code, tests and reviews — with honest notes on what actually works.',
+  },
+];
+
+/** What I'm experimenting with right now. */
+export const exploring: { title: string; text: string; art: Art; tag: string }[] = [
+  {
+    title: 'From EventStorming to domain model',
+    text: 'Using LLMs to turn workshop output — events, commands, policies — into a first draft of bounded contexts and aggregates to refine together.',
+    art: 'contours-light',
+    tag: 'AI × Modelling',
   },
   {
-    title: 'Data quality',
-    text: 'Business-driven quality indicators, probes and observability rather than one-off technical checks.',
+    title: 'Agents that respect the architecture',
+    text: 'Coding agents in the development loop, guided by explicit boundaries, tests and conventions instead of hope.',
+    art: 'spiro-dark',
+    tag: 'AI × Engineering',
   },
   {
-    title: 'AI on governed metadata',
-    text: 'Exposing trusted metadata to assistants and agents through APIs and MCP, so AI works on context you can trust.',
+    title: 'Governed context for AI',
+    text: 'Giving agents trusted context — ontologies and governed metadata exposed through MCP — instead of guesswork.',
+    art: 'mesh-light',
+    tag: 'AI × Data',
+  },
+];
+
+/** Where software craft meets data governance: the same ideas, one level up. */
+export const bridge: { from: string; to: string; text: string }[] = [
+  {
+    from: 'Ubiquitous language',
+    to: 'Ontologies & business glossaries',
+    text: 'Shared meaning, made explicit and linked to the data it describes.',
+  },
+  {
+    from: 'Bounded contexts',
+    to: 'Federated domains',
+    text: 'Domain autonomy, with a shared core model across the mesh.',
+  },
+  {
+    from: 'Ports & contracts',
+    to: 'Data products & data contracts',
+    text: 'Declarative descriptors with explicit, versioned interfaces.',
+  },
+  {
+    from: 'CI & automated tests',
+    to: 'Computational governance',
+    text: 'Policies as code, run as quality gates across the data product lifecycle.',
+  },
+  {
+    from: 'A shared domain model',
+    to: 'Governed context for AI',
+    text: 'The model that aligns a team is also what grounds an AI agent.',
   },
 ];
 
@@ -176,7 +223,7 @@ export const experience: { period: string; title: string; place: string; text: s
     period: '2022 — now',
     title: 'Software Engineer',
     place: 'Blindata',
-    text: 'Building the Blindata governance platform and contributing to the Open Data Mesh Initiative’s open source platform.',
+    text: 'Software engineering on a data governance platform — data products, contracts, computational governance and context for AI. Contributor to the Open Data Mesh Initiative’s open source platform.',
     url: 'https://blindata.io',
   },
   {

@@ -1,36 +1,32 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./banner-dark.svg">
-  <img alt="Gabriele Fantini — software engineer · data governance, data products & data mesh" src="./banner-light.svg" width="100%">
+  <img alt="Gabriele Fantini — From conversations to code. DDD · Clean architecture · EventStorming · AI in software engineering" src="./banner-light.svg" width="100%">
 </picture>
 
 ### Hi, I'm Gabriele 👋
 
-I'm a software engineer building **data governance** and **data mesh** tooling.
+I'm a software engineer who starts from the domain. I turn conversations with domain experts into models, models into clean architecture, and architecture into code — increasingly with AI in the loop.
 
-- 🏢 **[Blindata](https://blindata.io)** — Software Engineer since 2022. A governance platform for the full lifecycle of the enterprise information architecture: business glossary & ontologies, data catalog, lineage, data quality, data products, privacy — and Gen AI on top of governed metadata.
-- 🌐 **[Open Data Mesh Initiative](https://github.com/opendatamesh-initiative)** — open source specifications and software to boost data mesh adoption. I contribute to the [ODM Platform](https://github.com/opendatamesh-initiative/odm-platform), which manages the data product lifecycle on top of the [Data Product Descriptor Specification (DPDS)](https://dpds.opendatamesh.org/).
+#### 🧭 How I work
 
-#### What I work on
+- **Collaborative modelling** — domain storytelling and EventStorming to find the real problem before writing code.
+- **Domain-driven design** — ubiquitous language, bounded contexts and aggregates that speak the language of the business.
+- **Clean architecture** — explicit boundaries, ports and adapters, and a framework-independent core that stays testable.
+- **Solid engineering** — testing, CI and reliable delivery. Both my theses were about shipping software you can trust.
 
-| | |
-| --- | --- |
-| 📦 **Data products** | Declarative descriptors (DPDS): ports, data contracts and infrastructure as code |
-| 🔁 **Data product lifecycle** | Registry, blueprint and DevOps services of the ODM platform |
-| 🛡️ **Computational governance** | Policies that run automatically, shifted left into the pipeline |
-| 🧭 **Metadata & lineage** | Catalogs, glossaries and lineage linked in a knowledge graph |
-| ✅ **Data quality** | Business-driven quality indicators, probes and observability |
-| 🤖 **AI on governed metadata** | Trusted metadata as context for assistants and agents (APIs, MCP) |
+#### 🧪 Exploring now
 
-#### Stack
+- **AI × Modelling** — turning EventStorming output into a first draft of bounded contexts and aggregates.
+- **AI × Engineering** — coding agents in the development loop, guided by architecture, tests and conventions.
+- **AI × Data** — governed context for agents: ontologies and metadata exposed through MCP instead of guesswork.
 
-![Java](https://img.shields.io/badge/Java-000?style=flat-square&logo=openjdk&logoColor=white)
-![Spring](https://img.shields.io/badge/Spring-000?style=flat-square&logo=spring&logoColor=6DB33F)
-![TypeScript](https://img.shields.io/badge/TypeScript-000?style=flat-square&logo=typescript&logoColor=3178C6)
-![React](https://img.shields.io/badge/React-000?style=flat-square&logo=react&logoColor=61DAFB)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-000?style=flat-square&logo=postgresql&logoColor=4169E1)
-![Docker](https://img.shields.io/badge/Docker-000?style=flat-square&logo=docker&logoColor=2496ED)
+#### 🔗 Where software craft meets data
 
-#### Elsewhere
+Lately I've been applying DDD thinking to data: ubiquitous language → **ontologies**, bounded contexts → **federated domains**, ports & contracts → **data contracts**, CI → **computational governance**.
+
+<sub>Currently a software engineer at [@blindata](https://github.com/blindata) and a contributor to [@opendatamesh-initiative](https://github.com/opendatamesh-initiative).</sub>
+
+#### 📫 Elsewhere
 
 🌍 [gabrielefantini.github.io](https://gabrielefantini.github.io) · 💼 [LinkedIn](https://www.linkedin.com/in/gabriele-fantini-3b9711130) · ✉️ [gabrielefantini97@gmail.com](mailto:gabrielefantini97@gmail.com)
 

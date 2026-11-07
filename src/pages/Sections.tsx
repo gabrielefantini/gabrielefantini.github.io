@@ -8,8 +8,8 @@ export function Blog() {
     <>
       <PageHero
         eyebrow="Blog"
-        title="Notes on data products, governance and open source."
-        lead="Deep dives, engineering notes and lessons learned from building data governance software."
+        title="Notes on modelling, architecture and AI."
+        lead="Domain-driven design, clean architecture, AI in the development loop — and where all of it meets data governance."
       />
       <PostIndex posts={blogPosts} emptyText="No posts yet — the first one is on its way." />
     </>

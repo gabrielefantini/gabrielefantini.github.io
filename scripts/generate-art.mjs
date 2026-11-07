@@ -349,31 +349,127 @@ function ribbon(theme) {
   });
 }
 
+/**
+ * EventStorming / context-map line art: a timeline of "sticky notes"
+ * (events, commands, policies) grouped into bounded-context outlines,
+ * linked by context-map relationships.
+ */
+function contextsBody(theme, region, seed = 29, scale = 1) {
+  const p = PALETTES[theme];
+  const r = rng(seed);
+  const { x: rx, y: ry, w: rw, h: rh } = region;
+  const cy = ry + rh * 0.52;
+  const timelineY = (x) => cy + Math.sin(((x - rx) / rw) * Math.PI * 2.2 + 0.6) * rh * 0.07;
+  let body = '';
+
+  // Timeline: a double neon rail with an arrow head.
+  const rail = (off) => {
+    const pts = [];
+    for (let x = rx; x <= rx + rw; x += 24) pts.push([x, timelineY(x) + off]);
+    return smooth(pts);
+  };
+  body += `    <path d="${rail(0)}" stroke="url(#tl)" stroke-width="${f(1.8 * scale)}"/>\n`;
+  body += `    <path d="${rail(7 * scale)}" stroke="url(#tl)" stroke-width="${f(0.8 * scale)}" opacity="0.5"/>\n`;
+  const ex = rx + rw;
+  const ey = timelineY(ex);
+  body += `    <path d="M${f(ex - 16 * scale)},${f(ey - 9 * scale)} L${f(ex)},${f(ey)} L${f(ex - 16 * scale)},${f(ey + 9 * scale)}" stroke="${p.magenta}" stroke-width="${f(1.8 * scale)}"/>\n`;
+
+  // Bounded contexts: split the timeline into segments.
+  const segments = 3;
+  const segW = rw / segments;
+  const ctxColours = [p.green, p.violet, p.cyan];
+  const centres = [];
+  for (let s = 0; s < segments; s++) {
+    const sx = rx + segW * s + segW * 0.5;
+    const sy = timelineY(sx);
+    const bw = segW * 0.46;
+    const bh = rh * 0.36;
+    const ring = (grow) => {
+      const pts = [];
+      for (let k = 0; k < 14; k++) {
+        const a = (k / 14) * Math.PI * 2;
+        const wob = 1 + 0.08 * Math.sin(a * 3 + s * 2.1) + 0.05 * Math.sin(a * 5 + s);
+        pts.push([sx + Math.cos(a) * (bw + grow) * wob, sy + Math.sin(a) * (bh + grow) * wob]);
+      }
+      return smooth(pts, true);
+    };
+    body += `    <path d="${ring(0)}" stroke="${ctxColours[s]}" stroke-width="${f(1.4 * scale)}"/>\n`;
+    body += `    <path d="${ring(10 * scale)}" stroke="${ctxColours[s]}" stroke-width="${f(0.8 * scale)}" stroke-dasharray="${f(2 * scale)} ${f(8 * scale)}" opacity="0.8"/>\n`;
+    centres.push([sx, sy, bw, bh]);
+
+    // Sticky notes inside the context, alternating above / below the rail.
+    const notes = 5;
+    const size = Math.min(rh * 0.085, 46) * 1;
+    for (let i = 0; i < notes; i++) {
+      const nx = sx - bw * 0.72 + (i / (notes - 1)) * bw * 1.44;
+      const up = i % 2 === 0;
+      const ny = timelineY(nx) + (up ? -1 : 1) * (rh * 0.11 + r() * rh * 0.06);
+      const roll = r();
+      const col = roll < 0.6 ? p.amber : roll < 0.8 ? p.cyan : roll < 0.92 ? p.violet : p.magenta;
+      const rot = (r() - 0.5) * 14;
+      body += `    <line x1="${f(nx)}" y1="${f(timelineY(nx))}" x2="${f(nx)}" y2="${f(ny + (up ? size / 2 : -size / 2))}" stroke="${col}" stroke-width="${f(0.9 * scale)}" opacity="0.6"/>\n`;
+      body += `    <rect x="${f(nx - size / 2)}" y="${f(ny - size / 2)}" width="${f(size)}" height="${f(size)}" rx="${f(3 * scale)}" transform="rotate(${f(rot)} ${f(nx)} ${f(ny)})" stroke="${col}" stroke-width="${f(1.5 * scale)}"/>\n`;
+      body += `    <line x1="${f(nx - size * 0.28)}" y1="${f(ny - size * 0.1)}" x2="${f(nx + size * 0.28)}" y2="${f(ny - size * 0.1)}" transform="rotate(${f(rot)} ${f(nx)} ${f(ny)})" stroke="${col}" stroke-width="${f(1 * scale)}" opacity="0.7"/>\n`;
+      body += `    <line x1="${f(nx - size * 0.28)}" y1="${f(ny + size * 0.12)}" x2="${f(nx + size * 0.12)}" y2="${f(ny + size * 0.12)}" transform="rotate(${f(rot)} ${f(nx)} ${f(ny)})" stroke="${col}" stroke-width="${f(1 * scale)}" opacity="0.7"/>\n`;
+    }
+  }
+
+  // Context map: relationships arcing over and under neighbouring contexts.
+  for (let s = 0; s < segments - 1; s++) {
+    const [ax, ay, aw, ah] = centres[s];
+    const [bx, by, , bh] = centres[s + 1];
+    const over = s % 2 === 0;
+    const y1 = ay + (over ? -ah : ah);
+    const y2 = by + (over ? -bh : bh);
+    const my = (y1 + y2) / 2 + (over ? -1 : 1) * rh * 0.16;
+    const x1 = ax + aw * 0.35;
+    const x2 = bx - aw * 0.35;
+    body += `    <path d="M${f(x1)},${f(y1)} C${f(x1)},${f(my)} ${f(x2)},${f(my)} ${f(x2)},${f(y2)}" stroke="${p.magenta}" stroke-width="${f(1.2 * scale)}" stroke-dasharray="${f(6 * scale)} ${f(6 * scale)}"/>\n`;
+    for (const [cx, cyy] of [[x1, y1], [x2, y2]]) {
+      body += `    <circle cx="${f(cx)}" cy="${f(cyy)}" r="${f(4 * scale)}" stroke="${p.magenta}" stroke-width="${f(1.4 * scale)}"/>\n`;
+    }
+  }
+  // A long upstream link from the first to the last context.
+  const [fx, fy, , fh] = centres[0];
+  const [lx, ly, , lh] = centres[segments - 1];
+  const top = Math.min(fy - fh, ly - lh) - rh * 0.14;
+  body += `    <path d="M${f(fx)},${f(fy - fh)} C${f(fx)},${f(top)} ${f(lx)},${f(top)} ${f(lx)},${f(ly - lh)}" stroke="${p.amber}" stroke-width="${f(0.9 * scale)}" opacity="0.55"/>\n`;
+  return body;
+}
+
+function contextsGradients(theme) {
+  const p = PALETTES[theme];
+  return linGrad('tl', [p.cyan, p.violet, p.magenta]);
+}
+
+/** EventStorming timeline + bounded contexts. */
+function contexts(theme) {
+  const body = contextsBody(theme, { x: 120, y: 140, w: W - 240, h: H - 280 }, 29, 1.6);
+  return frame(theme, body, { gradients: contextsGradients(theme) });
+}
+
 /** Profile banner for the GitHub README (wide, with name). */
 function banner(theme) {
   const w = 1280;
   const h = 320;
-  const p = PALETTES[theme];
   const ink = theme === 'dark' ? '#ffffff' : '#0d0d0d';
-  const sub = theme === 'dark' ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.6)';
-  const art = flow(theme, 23, w, h);
+  const sub = theme === 'dark' ? 'rgba(255,255,255,0.72)' : 'rgba(0,0,0,0.62)';
+  const accent = PALETTES[theme].cyan;
+  const body = contextsBody(theme, { x: 720, y: 50, w: 520, h: 220 }, 41, 0.85);
+  const svg = frame(theme, body, { w, h, gradients: contextsGradients(theme) });
   const text = `  <g font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
-    <text x="64" y="150" font-size="56" font-weight="600" letter-spacing="-1.5" fill="${ink}">Gabriele Fantini</text>
-    <text x="66" y="198" font-size="22" fill="${sub}">Software engineer · data governance, data products &amp; data mesh</text>
-    <text x="66" y="236" font-size="16" fill="${p.cyan}" letter-spacing="1.5">BLINDATA · OPEN DATA MESH INITIATIVE</text>
+    <text x="64" y="130" font-size="52" font-weight="600" letter-spacing="-1.5" fill="${ink}">Gabriele Fantini</text>
+    <text x="66" y="178" font-size="24" fill="${sub}">From conversations to code.</text>
+    <text x="66" y="228" font-size="12" fill="${accent}" letter-spacing="1.4">DDD · CLEAN ARCHITECTURE · EVENTSTORMING · AI IN SOFTWARE ENGINEERING</text>
   </g>
 </svg>
 `;
-  // Fade the art behind the text for legibility.
-  const fade = `<linearGradient id="fade" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="${p.bg}" stop-opacity="0.95"/><stop offset="0.55" stop-color="${p.bg}" stop-opacity="0.55"/><stop offset="1" stop-color="${p.bg}" stop-opacity="0"/></linearGradient>`;
-  return art
-    .replace('</defs>', `  ${fade}\n  </defs>`)
-    .replace('</svg>\n', `  <rect width="${w}" height="${h}" fill="url(#fade)"/>\n${text}`);
+  return svg.replace('</svg>\n', text);
 }
 
 // ---------------------------------------------------------------- output
 
-const variants = { flow, mesh, orbits, spiro, lattice, contours, rays, ribbon };
+const variants = { flow, mesh, orbits, spiro, lattice, contours, rays, ribbon, contexts };
 
 mkdirSync(OUT, { recursive: true });
 mkdirSync(PROFILE_OUT, { recursive: true });

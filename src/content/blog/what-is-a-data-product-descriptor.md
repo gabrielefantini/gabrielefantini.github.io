@@ -3,7 +3,7 @@ title: What is a data product descriptor?
 date: 2026-11-06
 summary: A short tour of DPDS — the open specification that describes a data product in a single JSON or YAML document.
 art: mesh-dark
-tags: [data mesh, dpds]
+tags: [data & governance, dpds]
 draft: true
 ---
 

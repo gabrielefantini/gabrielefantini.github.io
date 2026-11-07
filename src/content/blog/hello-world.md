@@ -1,17 +1,21 @@
 ---
-title: Hello, world — again
+title: From conversations to code
 date: 2026-11-07
-summary: A new home for notes on data governance, data products and the open source work around data mesh.
+summary: Why I start from the domain, and what I'll be writing about here.
 art: flow-dark
-tags: [meta]
+tags: [notes]
 ---
 
-This is the first post on my new site. I'll use this space to write about the things I work on every day:
+This is the first post on my new site, so here's what to expect.
 
-- **Data products** and how to describe them declaratively with the [Data Product Descriptor Specification](https://dpds.opendatamesh.org/).
-- **Computational governance** — turning policies into checks that run where data is built.
-- **Metadata, lineage and data quality** in a governance platform like [Blindata](https://blindata.io).
-- **Open source** in the [Open Data Mesh Initiative](https://github.com/opendatamesh-initiative).
+I believe most of the hard problems in software are **understanding problems**. That's why I like to start from conversations — domain storytelling, EventStorming — before touching code, then shape what we learn with **domain-driven design** and protect it with **clean architecture** and tests.
+
+Here I'll write about:
+
+- **Modelling** — running collaborative modelling sessions and turning them into useful models.
+- **Architecture** — bounded contexts, ports and adapters, and keeping the core of a system honest.
+- **AI × Engineering** — experiments with AI as a collaborator across the development loop: what works, what doesn't, and why.
+- **Data & governance** — where all of the above meets data: ontologies, data contracts and governed context for AI agents.
 
 Expect a mix of deep dives, small engineering notes and things I learned the hard way.
 

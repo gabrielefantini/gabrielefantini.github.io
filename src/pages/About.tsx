@@ -8,8 +8,8 @@ export default function About() {
         <p className="eyebrow">About</p>
         <h1>Hi, I’m {profile.shortName}.</h1>
         <p className="lead">
-          I’m a software engineer from Italy. Since 2022 I’ve been building data governance software at Blindata, and
-          contributing to the open source platform of the Open Data Mesh Initiative.
+          I’m a software engineer from Italy who likes to understand a problem before solving it — and who keeps
+          experimenting with better ways to build software.
         </p>
       </header>
 
@@ -22,18 +22,30 @@ export default function About() {
           <h2 className="h-lg">In short</h2>
           <div className="prose prose-flush">
             <p>
-              I studied computer engineering in Perugia and Turin. My theses were about shipping software reliably —
-              over-the-air updates for automotive systems, then continuous integration for end-to-end testing of
-              mobile apps.
+              <strong>Roots.</strong> I have a solid engineering background, and both my theses were about shipping
+              software reliably — over-the-air updates for automotive systems, then continuous integration for
+              end-to-end testing of mobile apps. That instinct stuck: I care that code is correct, testable and easy to
+              change, not just done.
             </p>
             <p>
-              Today the same instinct points at data: I care about making data products <em>describable</em>,{' '}
-              <em>testable</em> and <em>governable</em> the way we already treat code. That means declarative
-              descriptors, policies that run automatically and metadata people — and AI agents — can trust.
+              <strong>Craft.</strong> Over time I’ve become convinced that most hard problems are understanding
+              problems. So I start with domain storytelling and EventStorming, shape the solution with domain-driven
+              design, and keep it honest with clean architecture.
             </p>
             <p>
-              Outside work I keep a small corner of this site for <SmartLink to="/life">things that have nothing to do
-              with data</SmartLink>.
+              <strong>Frontier.</strong> I like working at the edge of how software is made: trying new development
+              techniques and treating AI as a real collaborator in the loop — from modelling sessions to code, tests
+              and reviews. I write down what works and what doesn’t.
+            </p>
+            <p>
+              <strong>Today.</strong> I apply all of this to data governance and data mesh, at{' '}
+              <SmartLink to="/organizations">Blindata and in the Open Data Mesh Initiative</SmartLink>. The same ideas
+              carry over surprisingly well: ubiquitous language becomes ontologies, bounded contexts become federated
+              domains, and contracts become data contracts.
+            </p>
+            <p>
+              Outside work I keep a small corner of this site for{' '}
+              <SmartLink to="/life">things that have nothing to do with software</SmartLink>.
             </p>
           </div>
         </div>

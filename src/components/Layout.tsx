@@ -6,9 +6,9 @@ import { ArrowUpRight } from './ui';
 const nav = [
   { to: '/about', label: 'About' },
   { to: '/blog', label: 'Blog' },
-  { to: '/organizations', label: 'Organizations' },
   { to: '/sponsoring', label: 'Sponsoring' },
   { to: '/life', label: 'Life' },
+  { to: '/organizations', label: 'Where I work' },
 ];
 
 type Theme = 'light' | 'dark';
@@ -106,14 +106,8 @@ function Footer() {
           </div>
           <div>
             <p className="footer-title">Work</p>
-            <Link to="/organizations">Organizations</Link>
+            <Link to="/organizations">Where I work</Link>
             <Link to="/sponsoring">Sponsoring</Link>
-            <a href="https://blindata.io" target="_blank" rel="noreferrer">
-              Blindata
-            </a>
-            <a href="https://github.com/opendatamesh-initiative" target="_blank" rel="noreferrer">
-              Open Data Mesh
-            </a>
           </div>
           <div>
             <p className="footer-title">Elsewhere</p>

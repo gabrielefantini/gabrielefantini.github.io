@@ -976,3 +976,91 @@ button {
 .mt-xl {
   margin-top: 56px;
 }
+
+/* ------------------------------------------------------------------ home narrative */
+.step {
+  display: block;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--subtle);
+  margin-bottom: 10px;
+}
+
+.bridge {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.bridge li {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) auto minmax(0, 1.2fr);
+  gap: 16px;
+  align-items: baseline;
+  border-top: 1px solid var(--line);
+  padding: 18px 0;
+}
+
+.bridge li .icon {
+  color: var(--accent);
+  align-self: center;
+}
+
+.bridge-from {
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.bridge-to {
+  display: block;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+}
+
+.bridge p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+@media (max-width: 560px) {
+  .bridge li {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .bridge li .icon {
+    transform: rotate(90deg);
+    align-self: start;
+  }
+}
+
+.currently {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  margin-top: 48px;
+  padding: 18px 22px;
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.currently a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--fg);
+  font-weight: 500;
+}
+
+.currently .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+  flex: none;
+}
