@@ -504,6 +504,23 @@ function banner(theme) {
   return svg.replace('</svg>\n', text);
 }
 
+/** Social preview card (1200×630). Rasterised to public/og.png. */
+function ogCard() {
+  const w = 1200;
+  const h = 630;
+  const body = fanBody('dark', { x: 520, y: 0, w: 680, h }, 1.2);
+  const svg = frame('dark', body, { w, h, gradients: fanGradients('dark') });
+  const text = `  <g font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+    <text x="72" y="270" font-size="68" font-weight="600" letter-spacing="-2" fill="#ffffff">Gabriele Fantini</text>
+    <text x="74" y="330" font-size="30" fill="rgba(255,255,255,0.75)">Software Engineer · Umbria, Italy</text>
+    <text x="74" y="390" font-size="22" fill="rgba(255,255,255,0.55)">From conversations to code.</text>
+    <text x="74" y="540" font-size="18" fill="#00e5ff" letter-spacing="1.6">GABRIELEFANTINI.GITHUB.IO</text>
+  </g>
+</svg>
+`;
+  return svg.replace('</svg>\n', text);
+}
+
 // ---------------------------------------------------------------- output
 
 const variants = { flow, mesh, orbits, spiro, lattice, contours, rays, ribbon, contexts, fan };
@@ -524,4 +541,5 @@ for (const theme of ['dark', 'light']) {
   writeFileSync(join(PROFILE_OUT, `banner-${theme}.svg`), svg);
   count++;
 }
+writeFileSync(join(root, 'scripts', 'og-card.svg'), ogCard());
 console.log(`Generated ${count} SVGs in public/art (+ profile banners).`);

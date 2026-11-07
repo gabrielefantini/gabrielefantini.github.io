@@ -23,10 +23,11 @@ export const profile = {
   name: 'Gabriele Fantini',
   shortName: 'Gabriele',
   role: 'Software Engineer',
+  location: 'Umbria, Italy',
   eyebrow: 'Software engineer at Blindata · Contributor to the Open Data Mesh Initiative',
   headline: 'From conversations to code.',
   tagline:
-    'I’m a software engineer who starts from the domain. I turn conversations with domain experts into models, models into clean architecture, and architecture into code — increasingly with AI in the loop.',
+    'I’m Gabriele Fantini, a software engineer based in Umbria, Italy, who starts from the domain. I turn conversations with domain experts into models, models into clean architecture, and architecture into code — increasingly with AI in the loop.',
   currently:
     'Currently a software engineer at Blindata, a data governance platform, and a contributor to the open source platform of the Open Data Mesh Initiative.',
   email: 'gabrielefantini97@gmail.com',
@@ -252,16 +253,26 @@ export const education: { period: string; title: string; place: string; text: st
 ];
 
 /**
- * Open source projects I sponsor or want to support.
- * Empty for now — add entries and the Sponsoring page fills itself in.
+ * Lab: public, experimental repositories (AI in software development,
+ * modelling tools, architecture spikes…). Empty for now — add entries and
+ * the Lab page fills itself in.
+ *
+ * Example:
+ *   {
+ *     name: 'eventstorming-to-model',
+ *     description: 'LLM-assisted draft of bounded contexts from an EventStorming board.',
+ *     url: 'https://github.com/gabrielefantini/eventstorming-to-model',
+ *     tags: ['AI × Modelling'],
+ *     status: 'experiment',
+ *   },
  */
-export type Sponsored = {
+export type Experiment = {
   name: string;
-  owner: string;
   description: string;
   url: string;
-  sponsorUrl?: string;
+  tags: string[];
+  status?: 'experiment' | 'active' | 'archived';
   art?: Art;
 };
 
-export const sponsored: Sponsored[] = [];
+export const experiments: Experiment[] = [];

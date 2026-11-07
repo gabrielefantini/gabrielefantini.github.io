@@ -64,10 +64,10 @@ export default function Home() {
       </section>
 
       <section className="container section">
-        <SectionHeader title="Exploring now" action={{ label: 'Read the notes', to: '/blog' }} />
+        <SectionHeader title="Exploring now" action={{ label: 'Visit the lab', to: '/lab' }} />
         <div className="grid grid-3">
           {exploring.map((e) => (
-            <Card key={e.title} to="/blog" art={e.art} meta={e.tag} title={e.title} text={e.text} />
+            <Card key={e.title} to="/lab" art={e.art} meta={e.tag} title={e.title} text={e.text} />
           ))}
         </div>
       </section>
@@ -124,7 +124,7 @@ export default function Home() {
         <SectionHeader title="More of me" />
         <div className="grid grid-3">
           <Card to="/about" art="ribbon-light" meta="Introduction" title="About me" text="Background, craft, and how I ended up modelling data." />
-          <Card to="/sponsoring" art="rays-dark" meta="Open source" title="Projects I support" text="The open source work I want to give back to." />
+          <Card to="/lab" art="rays-dark" meta="Experiments" title="Lab" text="Public experimental repos: AI integrations in software development and more." />
           <Card to="/life" art="orbits-light" meta="Off the clock" title="Life" text="Notes on things that have nothing to do with software." />
         </div>
       </section>

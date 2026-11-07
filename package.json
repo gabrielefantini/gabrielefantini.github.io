@@ -8,7 +8,7 @@
     "dev": "vite",
     "art": "node scripts/generate-art.mjs",
     "typecheck": "tsc --noEmit",
-    "build": "tsc --noEmit && vite build && node scripts/spa-fallback.mjs",
+    "build": "tsc --noEmit && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

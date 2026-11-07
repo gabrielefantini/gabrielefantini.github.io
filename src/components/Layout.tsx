@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import { profile } from '../data/site';
+import { applyRouteMeta } from '../seo';
 import { ArrowUpRight } from './ui';
 
 const nav = [
   { to: '/about', label: 'About' },
   { to: '/organizations', label: 'Work' },
   { to: '/blog', label: 'Blog' },
-  { to: '/sponsoring', label: 'Sponsoring' },
+  { to: '/lab', label: 'Lab' },
   { to: '/life', label: 'Life' },
 ];
 
@@ -20,7 +21,12 @@ function currentTheme(): Theme {
 }
 
 function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>(() => currentTheme());
+  // Start with a fixed value so the pre-rendered HTML and the first client
+  // render match; read the real theme once mounted.
+  const [theme, setTheme] = useState<Theme>('light');
+  useEffect(() => {
+    setTheme(currentTheme());
+  }, []);
   const toggle = () => {
     const next: Theme = theme === 'dark' ? 'light' : 'dark';
     document.documentElement.dataset.theme = next;
@@ -109,7 +115,7 @@ function Footer() {
           <div>
             <p className="footer-title">Work</p>
             <Link to="/organizations">Work</Link>
-            <Link to="/sponsoring">Sponsoring</Link>
+            <Link to="/lab">Lab</Link>
           </div>
           <div>
             <p className="footer-title">Elsewhere</p>
@@ -140,8 +146,7 @@ export default function Layout() {
   }, [pathname]);
 
   useEffect(() => {
-    const page = nav.find((n) => pathname.startsWith(n.to));
-    document.title = page ? `${page.label} — ${profile.name}` : profile.name;
+    applyRouteMeta(pathname);
   }, [pathname]);
 
   return (

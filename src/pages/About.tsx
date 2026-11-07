@@ -6,9 +6,9 @@ export default function About() {
     <>
       <header className="page-hero container">
         <p className="eyebrow">About</p>
-        <h1>Hi, I’m {profile.shortName}.</h1>
+        <h1>Hi, I’m {profile.name}.</h1>
         <p className="lead">
-          I’m a software engineer from Italy who likes to understand a problem before solving it — and who keeps
+          I’m a software engineer and developer based in Umbria, Italy, who likes to understand a problem before solving it — and who keeps
           experimenting with better ways to build software.
         </p>
       </header>
