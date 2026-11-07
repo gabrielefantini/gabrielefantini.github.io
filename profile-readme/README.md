@@ -5,7 +5,7 @@
 
 ### Hi, I'm Gabriele 👋
 
-I'm a software engineer who starts from the domain. I turn conversations with domain experts into models, models into clean architecture, and architecture into code — increasingly with AI in the loop.
+I'm a software engineer who asks a lot of questions before the code starts. I think good software comes from understanding the domain well, and that usually means listening more than typing. Lately, AI does some of the typing for me.
 
 #### 💼 My work in data governance
 

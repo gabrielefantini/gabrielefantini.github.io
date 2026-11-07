@@ -27,7 +27,7 @@ export const profile = {
   eyebrow: 'Software engineer at Blindata · Contributor to the Open Data Mesh Initiative',
   headline: 'From conversations to code.',
   tagline:
-    'I’m Gabriele Fantini, a software engineer based in Umbria, Italy, who starts from the domain. I turn conversations with domain experts into models, models into clean architecture, and architecture into code — increasingly with AI in the loop.',
+    'I’m Gabriele Fantini, a software engineer in Umbria, Italy. I’m the one asking a lot of questions before the code starts. I think good software comes from understanding the domain well, and that usually means listening more than typing. Lately, AI does some of the typing for me.',
   currently:
     'Currently a software engineer at Blindata, a data governance platform, and a contributor to the open source platform of the Open Data Mesh Initiative.',
   email: 'gabrielefantini97@gmail.com',
