@@ -40,7 +40,8 @@ export default function Organizations() {
             </div>
           </div>
 
-          <ul className="focus-list cols-3 mt-xl">
+          {o.highlightsTitle && <h3 className="h-md mt-xl">{o.highlightsTitle}</h3>}
+          <ul className={`focus-list cols-3 ${o.highlightsTitle ? '' : 'mt-xl'}`}>
             {o.highlights.map((h) => (
               <li key={h.title}>
                 <h3>{h.title}</h3>

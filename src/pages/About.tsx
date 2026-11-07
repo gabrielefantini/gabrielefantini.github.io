@@ -64,6 +64,16 @@ export default function About() {
                     {e.url ? <SmartLink to={e.url}>{e.place}</SmartLink> : e.place}
                   </h3>
                   <p>{e.text}</p>
+                  {e.highlights && (
+                    <ul className="exp-highlights">
+                      {e.highlights.map((h) => (
+                        <li key={h.title}>
+                          <strong>{h.title}</strong>
+                          <span>{h.text}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               </li>
             ))}

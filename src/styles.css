@@ -616,7 +616,7 @@ button {
   padding: 0;
 }
 
-.timeline li {
+.timeline > li {
   display: grid;
   grid-template-columns: 140px 1fr;
   gap: 8px 24px;
@@ -630,7 +630,7 @@ button {
   padding-top: 2px;
 }
 
-.timeline h3 {
+.timeline > li > div > h3 {
   font-size: 18px;
   letter-spacing: -0.015em;
   margin-bottom: 6px;
@@ -642,12 +642,12 @@ button {
   text-underline-offset: 4px;
 }
 
-.timeline p {
+.timeline > li > div > p {
   color: var(--muted);
 }
 
 @media (max-width: 560px) {
-  .timeline li {
+  .timeline > li {
     grid-template-columns: 1fr;
   }
 }
@@ -1063,4 +1063,40 @@ button {
   background: var(--accent);
   box-shadow: 0 0 10px var(--accent);
   flex: none;
+}
+
+/* ------------------------------------------------------------------ experience highlights */
+.exp-highlights {
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 24px;
+}
+
+.exp-highlights li {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-left: 14px;
+  border-left: 2px solid var(--line);
+}
+
+.exp-highlights strong {
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--fg);
+}
+
+.exp-highlights span {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+@media (max-width: 640px) {
+  .exp-highlights {
+    grid-template-columns: 1fr;
+  }
 }

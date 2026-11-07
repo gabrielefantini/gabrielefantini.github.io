@@ -37,6 +37,34 @@ export const profile = {
   },
 };
 
+/** What I've built at Blindata — shown on the About (Experience) and Work pages. */
+export const blindataWork: { title: string; text: string }[] = [
+  {
+    title: 'AI Assistant',
+    text: 'Blindata’s AI Assistant: an in-app chat for the everyday tasks of data stewards and analysts, with answers grounded in the organization’s ontology and linked to the right data assets.',
+  },
+  {
+    title: 'AI agent infrastructure',
+    text: 'The layer that gives assistants and external agents governed context — an MCP server, semantic search and context engineering — so AI reasons on trusted metadata instead of guessing.',
+  },
+  {
+    title: 'ML anomaly detection',
+    text: 'Machine-learning services that detect anomalies in data quality and observability metrics.',
+  },
+  {
+    title: 'Language parsers',
+    text: 'Custom parsers for software and query languages that extract metadata and lineage automatically from code.',
+  },
+  {
+    title: 'System integrations',
+    text: 'Low-level connectors for Blindata’s crawlers, harvesting metadata from databases, BI tools and data platforms.',
+  },
+  {
+    title: 'Microservices for data platforms',
+    text: 'A microservices architecture that runs data platform activities across the data product lifecycle: registry, blueprints, DevOps and policies.',
+  },
+];
+
 export type Org = {
   id: string;
   name: string;
@@ -46,6 +74,7 @@ export type Org = {
   url: string;
   github?: string;
   art: Art;
+  highlightsTitle?: string;
   highlights: { title: string; text: string }[];
   repos?: { name: string; description: string; url: string }[];
 };
@@ -64,28 +93,8 @@ export const orgs: Org[] = [
     url: 'https://blindata.io',
     github: 'https://github.com/blindata',
     art: 'contours-dark',
-    highlights: [
-      {
-        title: 'Metadata management',
-        text: 'Business glossary, data catalog and a data products catalog, linked through ontologies.',
-      },
-      {
-        title: 'Data products',
-        text: 'Marketplace, computational governance policies and a DataOps platform with shift-left data contracts.',
-      },
-      {
-        title: 'Data quality & lineage',
-        text: 'Key quality indicators, probes, observability, and automated technical & semantic SQL lineage.',
-      },
-      {
-        title: 'Gen AI on governed metadata',
-        text: 'AI assistant, semantic search and an MCP server that turns governed metadata into context for agents.',
-      },
-      {
-        title: 'Privacy & compliance',
-        text: 'Record of processing activities, privacy notices and consent management for GDPR and regulated industries.',
-      },
-    ],
+    highlightsTitle: 'What I’ve built',
+    highlights: blindataWork,
   },
   {
     id: 'opendatamesh',
@@ -100,6 +109,7 @@ export const orgs: Org[] = [
     url: 'https://initiative.opendatamesh.org/',
     github: 'https://github.com/opendatamesh-initiative',
     art: 'mesh-light',
+    highlightsTitle: 'The initiative',
     highlights: [
       {
         title: 'DPDS',
@@ -220,20 +230,28 @@ export const bridge: { from: string; to: string; text: string }[] = [
   },
 ];
 
-export const experience: { period: string; title: string; place: string; text: string; url?: string }[] = [
+export const experience: {
+  period: string;
+  title: string;
+  place: string;
+  text: string;
+  url?: string;
+  highlights?: { title: string; text: string }[];
+}[] = [
   {
     period: '2022 — now',
     title: 'Software Engineer',
     place: 'Blindata',
-    text: 'Software engineering on a data governance platform — data products, contracts, computational governance and context for AI. Contributor to the Open Data Mesh Initiative’s open source platform.',
+    text: 'I design and build the core of a data governance platform, from low-level integrations to AI.',
     url: 'https://blindata.io',
+    highlights: blindataWork,
   },
   {
-    period: 'Side project',
-    title: 'Front-end developer',
-    place: 'Ecosentinel',
-    text: 'Front end of the Ecosentinel web application.',
-    url: 'https://www.ecosentinel.it/',
+    period: 'Open source',
+    title: 'Contributor',
+    place: 'Open Data Mesh Initiative',
+    text: 'Contributor to the ODM Platform: the open source services that manage the data product lifecycle on top of the Data Product Descriptor Specification (DPDS).',
+    url: 'https://github.com/opendatamesh-initiative',
   },
 ];
 
