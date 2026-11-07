@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { blogPosts } from '../content/posts';
-import { bridge, exploring, pillars, profile } from '../data/site';
+import { bridge, exploring, orgs, pillars, profile } from '../data/site';
 import { Art, ArrowRight, ArrowUpRight, Button, Card, SectionHeader } from '../components/ui';
 import { postMeta } from '../components/Posts';
 
@@ -23,6 +23,22 @@ export default function Home() {
 
       <section className="container">
         <Art name="fan-dark" ratio="21 / 9" className="hero-art" eager />
+      </section>
+
+      <section className="container section">
+        <SectionHeader title="My work in data governance" action={{ label: 'More about my work', to: '/organizations' }} />
+        <div className="grid grid-2">
+          {orgs.map((o) => (
+            <Link key={o.id} to={`/organizations#${o.id}`} className="card card-lg">
+              <Art name={o.art} ratio="4 / 3" />
+              <div className="card-body">
+                <p className="card-meta">{o.kicker}</p>
+                <h3 className="card-title card-title-lg">{o.name}</h3>
+                <p className="card-text">{o.summary}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
       </section>
 
       <section className="container section">
@@ -79,13 +95,6 @@ export default function Home() {
             ))}
           </ul>
         </div>
-        <p className="currently">
-          <span className="dot" aria-hidden="true" />
-          {profile.currently}{' '}
-          <Link to="/organizations">
-            Where I work <ArrowRight />
-          </Link>
-        </p>
       </section>
 
       {latest.length > 0 && (

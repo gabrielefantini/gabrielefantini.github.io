@@ -23,7 +23,7 @@ export const profile = {
   name: 'Gabriele Fantini',
   shortName: 'Gabriele',
   role: 'Software Engineer',
-  eyebrow: 'Software engineer · Domain-driven design · AI in software engineering',
+  eyebrow: 'Software engineer at Blindata · Contributor to the Open Data Mesh Initiative',
   headline: 'From conversations to code.',
   tagline:
     'I’m a software engineer who starts from the domain. I turn conversations with domain experts into models, models into clean architecture, and architecture into code — increasingly with AI in the loop.',
@@ -53,9 +53,9 @@ export const orgs: Org[] = [
   {
     id: 'blindata',
     name: 'Blindata',
-    kicker: 'Software engineer · since 2022',
+    kicker: 'Software engineer · since 2022 · Data governance platform',
     summary:
-      'A governance platform for the full lifecycle of the enterprise information architecture — from knowledge to data assets.',
+      'I build a data governance platform for the whole enterprise information architecture: ontologies and glossary, catalog, lineage, data quality, data products and computational governance — with governed metadata as context for AI agents.',
     description: [
       'Blindata is an Italian SaaS platform that governs information architectures end to end: business glossary and ontologies, data catalog, lineage, data quality, data products and privacy compliance — all linked in a single knowledge graph.',
       'It’s where I apply domain-driven thinking to data: data products with explicit contracts, governance policies that run as code, and governed metadata that AI assistants and agents can use as trusted context.',
@@ -89,9 +89,9 @@ export const orgs: Org[] = [
   {
     id: 'opendatamesh',
     name: 'Open Data Mesh Initiative',
-    kicker: 'Open source contributor',
+    kicker: 'Open source contributor · Data mesh',
     summary:
-      'Open source software, standards and protocols to boost data mesh adoption. Sharing is caring.',
+      'Open source specifications and software to boost data mesh adoption. I contribute to the ODM Platform, which manages the data product lifecycle on top of the Data Product Descriptor Specification (DPDS).',
     description: [
       'The Open Data Mesh Initiative fosters the paradigm shift in the world of data through open specifications and open source software, released under the Apache 2.0 license.',
       'At its core is the Data Product Descriptor Specification (DPDS): a technology-agnostic, composable and extensible way to declaratively describe a data product — its ports, contracts and infrastructure — in a JSON or YAML document. The ODM Platform builds on it to manage the whole data product lifecycle. I contribute to the platform’s services, including the registry and blueprint servers.',
@@ -185,7 +185,7 @@ export const exploring: { title: string; text: string; art: Art; tag: string }[]
   {
     title: 'Governed context for AI',
     text: 'Giving agents trusted context — ontologies and governed metadata exposed through MCP — instead of guesswork.',
-    art: 'mesh-light',
+    art: 'lattice-light',
     tag: 'AI × Data',
   },
 ];

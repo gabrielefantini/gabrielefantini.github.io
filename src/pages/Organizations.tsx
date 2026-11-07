@@ -12,9 +12,9 @@ export default function Organizations() {
   return (
     <>
       <PageHero
-        eyebrow="Where I work"
-        title="Where I put the craft to work."
-        lead="Today I apply domain-driven thinking to data governance and data mesh: on a governance platform, and in an open initiative building standards and open source software for data products."
+        eyebrow="Work"
+        title="My work in data governance."
+        lead="I build data governance software at Blindata and contribute to the open source platform of the Open Data Mesh Initiative — bringing domain-driven thinking to ontologies, data products and data contracts."
       />
 
       {orgs.map((o, i) => (

@@ -5,10 +5,10 @@ import { ArrowUpRight } from './ui';
 
 const nav = [
   { to: '/about', label: 'About' },
+  { to: '/organizations', label: 'Work' },
   { to: '/blog', label: 'Blog' },
   { to: '/sponsoring', label: 'Sponsoring' },
   { to: '/life', label: 'Life' },
-  { to: '/organizations', label: 'Where I work' },
 ];
 
 type Theme = 'light' | 'dark';
@@ -50,7 +50,9 @@ function ThemeToggle() {
 function Header() {
   const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
-  useEffect(() => setOpen(false), [pathname]);
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   return (
     <header className={`site-header ${open ? 'is-open' : ''}`}>
@@ -106,7 +108,7 @@ function Footer() {
           </div>
           <div>
             <p className="footer-title">Work</p>
-            <Link to="/organizations">Where I work</Link>
+            <Link to="/organizations">Work</Link>
             <Link to="/sponsoring">Sponsoring</Link>
           </div>
           <div>
@@ -133,7 +135,9 @@ function Footer() {
 
 export default function Layout() {
   const { pathname } = useLocation();
-  useEffect(() => window.scrollTo(0, 0), [pathname]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   useEffect(() => {
     const page = nav.find((n) => pathname.startsWith(n.to));
