@@ -7,6 +7,11 @@
 
 I'm a software engineer who starts from the domain. I turn conversations with domain experts into models, models into clean architecture, and architecture into code — increasingly with AI in the loop.
 
+#### 💼 My work in data governance
+
+- 🏢 **[Blindata](https://blindata.io)** — Software Engineer since 2022. I build a data governance platform for the whole enterprise information architecture: ontologies and business glossary, data catalog, lineage, data quality, data products and marketplace, computational governance — and governed metadata as context for AI agents via MCP.
+- 🌐 **[Open Data Mesh Initiative](https://github.com/opendatamesh-initiative)** — open source specifications and software to boost data mesh adoption. I contribute to the [ODM Platform](https://github.com/opendatamesh-initiative/odm-platform), which manages the data product lifecycle on top of the [Data Product Descriptor Specification (DPDS)](https://dpds.opendatamesh.org/).
+
 #### 🧭 How I work
 
 - **Collaborative modelling** — domain storytelling and EventStorming to find the real problem before writing code.
@@ -19,12 +24,6 @@ I'm a software engineer who starts from the domain. I turn conversations with do
 - **AI × Modelling** — turning EventStorming output into a first draft of bounded contexts and aggregates.
 - **AI × Engineering** — coding agents in the development loop, guided by architecture, tests and conventions.
 - **AI × Data** — governed context for agents: ontologies and metadata exposed through MCP instead of guesswork.
-
-#### 🔗 Where software craft meets data
-
-Lately I've been applying DDD thinking to data: ubiquitous language → **ontologies**, bounded contexts → **federated domains**, ports & contracts → **data contracts**, CI → **computational governance**.
-
-<sub>Currently a software engineer at [@blindata](https://github.com/blindata) and a contributor to [@opendatamesh-initiative](https://github.com/opendatamesh-initiative).</sub>
 
 #### 📫 Elsewhere
 
