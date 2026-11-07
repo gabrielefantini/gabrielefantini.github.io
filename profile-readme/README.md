@@ -33,7 +33,7 @@ Lately I've been applying DDD thinking to data: ubiquitous language → **ontolo
 <details>
 <summary>🎓 Education</summary>
 
-- **MSc, Computer Engineering** — Politecnico di Torino (2020–2022). Thesis: *Continuous integration for end-to-end testing of mobile applications*.
-- **BSc, Computer & Electronic Engineering** — Università degli Studi di Perugia (2016–2020). Thesis on over-the-air (OTA) software updates for automotive applications.
+- **MSc, Computer Engineering** — Politecnico di Torino (2020–2022). Thesis: [*Continuous integration for end-to-end testing of mobile applications*](./MasterThesis.pdf).
+- **BSc, Computer & Electronic Engineering** — Università degli Studi di Perugia (2016–2020). [Thesis](./BachelorThesis.pdf) on over-the-air (OTA) software updates for automotive applications.
 
 </details>
