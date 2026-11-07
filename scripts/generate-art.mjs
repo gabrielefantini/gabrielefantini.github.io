@@ -145,6 +145,21 @@ function flow(theme, seed = 7, w = W, h = H) {
   });
 }
 
+/** Segment between two nodes [x, y, r], shortened to stop just outside each circle. */
+function trim(a, b, gap = 3) {
+  const dx = b[0] - a[0];
+  const dy = b[1] - a[1];
+  const len = Math.hypot(dx, dy) || 1;
+  const ux = dx / len;
+  const uy = dy / len;
+  const ra = a[2] ? a[2] + gap : 0;
+  const rb = b[2] ? b[2] + gap : 0;
+  return [
+    [a[0] + ux * ra, a[1] + uy * ra],
+    [b[0] - ux * rb, b[1] - uy * rb],
+  ];
+}
+
 /** Data-mesh: domain clusters of nodes, connected locally and across domains. */
 function mesh(theme, seed = 11) {
   const p = PALETTES[theme];
@@ -160,10 +175,14 @@ function mesh(theme, seed = 11) {
   for (const d of domains) {
     const nodes = [];
     const n = 14 + Math.floor(r() * 5);
-    for (let i = 0; i < n; i++) {
+    // rejection sampling keeps nodes apart, so no edge collapses into a speck
+    for (let tries = 0; nodes.length < n && tries < 2000; tries++) {
       const a = r() * Math.PI * 2;
       const rad = 20 + Math.sqrt(r()) * 170;
-      nodes.push([d.cx + Math.cos(a) * rad * 1.25, d.cy + Math.sin(a) * rad * 0.85]);
+      const x = d.cx + Math.cos(a) * rad * 1.25;
+      const y = d.cy + Math.sin(a) * rad * 0.85;
+      if (nodes.some(([nx, ny]) => Math.hypot(nx - x, ny - y) < 46)) continue;
+      nodes.push([x, y, 3 + r() * 4]);
     }
     // local edges: each node to its 2 nearest neighbours
     const seen = new Set();
@@ -177,8 +196,8 @@ function mesh(theme, seed = 11) {
         const k = i < j ? `${i}-${j}` : `${j}-${i}`;
         if (seen.has(k)) continue;
         seen.add(k);
-        const b = nodes[j];
-        body += `    <line x1="${f(a[0])}" y1="${f(a[1])}" x2="${f(b[0])}" y2="${f(b[1])}" stroke="${d.c}" stroke-width="1.5" opacity="0.9"/>\n`;
+        const [p1, p2] = trim(a, nodes[j]);
+        body += `    <line x1="${f(p1[0])}" y1="${f(p1[1])}" x2="${f(p2[0])}" y2="${f(p2[1])}" stroke="${d.c}" stroke-width="1.5" opacity="0.9"/>\n`;
       }
     });
     // domain boundary
@@ -189,8 +208,7 @@ function mesh(theme, seed = 11) {
       ring.push([d.cx + Math.cos(a) * rr * 1.2, d.cy + Math.sin(a) * rr * 0.8]);
     }
     body += `    <path d="${smooth(ring, true)}" stroke="${d.c}" stroke-width="1" stroke-dasharray="2 9" opacity="0.85"/>\n`;
-    for (const [x, y] of nodes) {
-      const s = 3 + r() * 4;
+    for (const [x, y, s] of nodes) {
       body += `    <circle cx="${f(x)}" cy="${f(y)}" r="${f(s)}" stroke="${d.c}" stroke-width="1.6"/>\n`;
     }
     all.push({ d, nodes });
@@ -198,10 +216,13 @@ function mesh(theme, seed = 11) {
   // cross-domain links (data products exposed through ports)
   const pairs = [[0, 1], [0, 2], [1, 3], [2, 3], [0, 3]];
   for (const [a, b] of pairs) {
-    const A = all[a].nodes[0];
-    const B = all[b].nodes[1];
-    const mx = (A[0] + B[0]) / 2 + (r() - 0.5) * 200;
-    const my = (A[1] + B[1]) / 2 + (r() - 0.5) * 200;
+    const A0 = all[a].nodes[0];
+    const B0 = all[b].nodes[1];
+    const mx = (A0[0] + B0[0]) / 2 + (r() - 0.5) * 200;
+    const my = (A0[1] + B0[1]) / 2 + (r() - 0.5) * 200;
+    // start/end on the node outlines, aimed at the control point
+    const [A] = trim(A0, [mx, my, 0]);
+    const [, B] = trim([mx, my, 0], B0);
     body += `    <path d="M${f(A[0])},${f(A[1])} Q${f(mx)},${f(my)} ${f(B[0])},${f(B[1])}" stroke="${p.amber}" stroke-width="1.3" opacity="0.85"/>\n`;
   }
   return frame(theme, body);
