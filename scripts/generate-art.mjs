@@ -184,28 +184,28 @@ function mesh(theme, seed = 11) {
       if (nodes.some(([nx, ny]) => Math.hypot(nx - x, ny - y) < 46)) continue;
       nodes.push([x, y, 3 + r() * 4]);
     }
-    // local edges: each node to its 2 nearest neighbours
-    const seen = new Set();
-    nodes.forEach((a, i) => {
-      const near = nodes
-        .map((b, j) => [j, Math.hypot(a[0] - b[0], a[1] - b[1])])
-        .filter(([j]) => j !== i)
-        .sort((x, y) => x[1] - y[1])
-        .slice(0, 3);
-      for (const [j] of near) {
-        const k = i < j ? `${i}-${j}` : `${j}-${i}`;
-        if (seen.has(k)) continue;
-        seen.add(k);
-        const [p1, p2] = trim(a, nodes[j]);
+    // local edges: Gabriel graph — planar (no crossings) and free of thin slivers
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const a = nodes[i];
+        const b = nodes[j];
+        const mx = (a[0] + b[0]) / 2;
+        const my = (a[1] + b[1]) / 2;
+        const r2 = ((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2) / 4;
+        const blocked = nodes.some(
+          (c, k) => k !== i && k !== j && (c[0] - mx) ** 2 + (c[1] - my) ** 2 <= r2,
+        );
+        if (blocked) continue;
+        const [p1, p2] = trim(a, b);
         body += `    <line x1="${f(p1[0])}" y1="${f(p1[1])}" x2="${f(p2[0])}" y2="${f(p2[1])}" stroke="${d.c}" stroke-width="1.5" opacity="0.9"/>\n`;
       }
-    });
+    }
     // domain boundary
     const ring = [];
     for (let k = 0; k < 12; k++) {
       const a = (k / 12) * Math.PI * 2;
       const rr = 270 + Math.sin(a * 3 + r() * 2) * 18;
-      ring.push([d.cx + Math.cos(a) * rr * 1.2, d.cy + Math.sin(a) * rr * 0.8]);
+      ring.push([d.cx + Math.cos(a) * rr * 1.2, d.cy + Math.sin(a) * rr * 0.76]);
     }
     body += `    <path d="${smooth(ring, true)}" stroke="${d.c}" stroke-width="1" stroke-dasharray="2 9" opacity="0.85"/>\n`;
     for (const [x, y, s] of nodes) {
@@ -216,10 +216,20 @@ function mesh(theme, seed = 11) {
   // cross-domain links (data products exposed through ports)
   const pairs = [[0, 1], [0, 2], [1, 3], [2, 3], [0, 3]];
   for (const [a, b] of pairs) {
-    const A0 = all[a].nodes[0];
-    const B0 = all[b].nodes[1];
-    const mx = (A0[0] + B0[0]) / 2 + (r() - 0.5) * 200;
-    const my = (A0[1] + B0[1]) / 2 + (r() - 0.5) * 200;
+    // ports: the node of each domain that faces the other one
+    const da = all[a].d;
+    const db = all[b].d;
+    const ux = db.cx - da.cx;
+    const uy = db.cy - da.cy;
+    const facing = (nodes, sign) =>
+      nodes.reduce((best, n) => (sign * (n[0] * ux + n[1] * uy) > sign * (best[0] * ux + best[1] * uy) ? n : best));
+    const A0 = facing(all[a].nodes, 1);
+    const B0 = facing(all[b].nodes, -1);
+    // gentle bow, perpendicular to the link
+    const len = Math.hypot(B0[0] - A0[0], B0[1] - A0[1]);
+    const bow = (r() < 0.5 ? -1 : 1) * (0.08 + r() * 0.06) * len;
+    const mx = (A0[0] + B0[0]) / 2 - ((B0[1] - A0[1]) / len) * bow;
+    const my = (A0[1] + B0[1]) / 2 + ((B0[0] - A0[0]) / len) * bow;
     // start/end on the node outlines, aimed at the control point
     const [A] = trim(A0, [mx, my, 0]);
     const [, B] = trim([mx, my, 0], B0);
