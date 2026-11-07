@@ -22,7 +22,7 @@ export default function Home() {
       </header>
 
       <section className="container">
-        <Art name="contexts-dark" ratio="21 / 9" className="hero-art" eager />
+        <Art name="fan-dark" ratio="21 / 9" className="hero-art" eager />
       </section>
 
       <section className="container section">

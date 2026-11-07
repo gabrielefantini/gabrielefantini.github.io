@@ -13,6 +13,7 @@ export type ArtName =
   | 'rays'
   | 'ribbon'
   | 'contexts'
+  | 'fan'
   | 'banner';
 
 /** An illustration reference, e.g. `mesh-dark` or `flow-light`. */

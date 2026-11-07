@@ -448,6 +448,43 @@ function contexts(theme) {
   return frame(theme, body, { gradients: contextsGradients(theme) });
 }
 
+/** Two families of sweeping curves crossing into a moiré. Purely abstract. */
+function fanBody(theme, region, scale = 1) {
+  const p = PALETTES[theme];
+  const { x: rx, y: ry, w: rw, h: rh } = region;
+  const n = 46;
+  let body = '';
+  for (let i = 0; i < n; i++) {
+    const t = i / (n - 1);
+    // Family A: rising from bottom-right, fanning out to the top.
+    const ax0 = rx + rw * 1.02;
+    const ay0 = ry + rh * 1.08;
+    const ax1 = rx + rw * (0.05 + t * 0.9);
+    const ay1 = ry - rh * 0.05;
+    const acx = rx + rw * (0.15 + t * 0.35);
+    const acy = ry + rh * (1.0 - t * 0.35);
+    body += `    <path d="M${f(ax0)},${f(ay0)} Q${f(acx)},${f(acy)} ${f(ax1)},${f(ay1)}" stroke="url(#fa)" stroke-width="${f(1.1 * scale)}" opacity="${f(0.35 + 0.65 * Math.sin(t * Math.PI))}"/>\n`;
+    // Family B: mirrored, falling from top-right, crossing family A.
+    const bx0 = rx + rw * 1.02;
+    const by0 = ry - rh * 0.08;
+    const bx1 = rx + rw * (0.25 + t * 0.75);
+    const by1 = ry + rh * 1.05;
+    const bcx = rx + rw * (0.3 + t * 0.25);
+    const bcy = ry + rh * (0.1 + t * 0.4);
+    body += `    <path d="M${f(bx0)},${f(by0)} Q${f(bcx)},${f(bcy)} ${f(bx1)},${f(by1)}" stroke="url(#fb)" stroke-width="${f(0.9 * scale)}" opacity="${f(0.25 + 0.5 * Math.sin(t * Math.PI))}"/>\n`;
+  }
+  return body;
+}
+
+function fanGradients(theme) {
+  const p = PALETTES[theme];
+  return linGrad('fa', [p.cyan, p.violet, p.magenta], 0, 1, 1, 0) + linGrad('fb', [p.magenta, p.amber], 0, 0, 1, 1);
+}
+
+function fan(theme) {
+  return frame(theme, fanBody(theme, { x: 0, y: 0, w: W, h: H }, 1.6), { gradients: fanGradients(theme) });
+}
+
 /** Profile banner for the GitHub README (wide, with name). */
 function banner(theme) {
   const w = 1280;
@@ -455,8 +492,8 @@ function banner(theme) {
   const ink = theme === 'dark' ? '#ffffff' : '#0d0d0d';
   const sub = theme === 'dark' ? 'rgba(255,255,255,0.72)' : 'rgba(0,0,0,0.62)';
   const accent = PALETTES[theme].cyan;
-  const body = contextsBody(theme, { x: 720, y: 50, w: 520, h: 220 }, 41, 0.85);
-  const svg = frame(theme, body, { w, h, gradients: contextsGradients(theme) });
+  const body = fanBody(theme, { x: 560, y: 0, w: 720, h }, 1);
+  const svg = frame(theme, body, { w, h, gradients: fanGradients(theme) });
   const text = `  <g font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
     <text x="64" y="130" font-size="52" font-weight="600" letter-spacing="-1.5" fill="${ink}">Gabriele Fantini</text>
     <text x="66" y="178" font-size="24" fill="${sub}">From conversations to code.</text>
@@ -469,7 +506,7 @@ function banner(theme) {
 
 // ---------------------------------------------------------------- output
 
-const variants = { flow, mesh, orbits, spiro, lattice, contours, rays, ribbon, contexts };
+const variants = { flow, mesh, orbits, spiro, lattice, contours, rays, ribbon, contexts, fan };
 
 mkdirSync(OUT, { recursive: true });
 mkdirSync(PROFILE_OUT, { recursive: true });
