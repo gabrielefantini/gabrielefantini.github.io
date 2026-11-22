@@ -9,6 +9,7 @@ const nav = [
   { to: '/organizations', label: 'Work' },
   { to: '/blog', label: 'Blog' },
   { to: '/lab', label: 'Lab' },
+  { to: '/daily', label: 'Daily' },
   { to: '/life', label: 'Life' },
 ];
 
@@ -110,6 +111,7 @@ function Footer() {
             <p className="footer-title">Site</p>
             <Link to="/about">About</Link>
             <Link to="/blog">Blog</Link>
+            <Link to="/daily">Daily</Link>
             <Link to="/life">Life</Link>
           </div>
           <div>

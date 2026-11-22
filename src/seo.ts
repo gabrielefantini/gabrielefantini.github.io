@@ -1,5 +1,6 @@
 import { blogPosts, lifePosts, type Post } from './content/posts';
 import { education, orgs, profile } from './data/site';
+import { issuesOf, longDate, paperById, papers, syllabusOf } from './content/daily';
 
 /** Public origin of the site, used for canonical URLs, sitemap and social cards. */
 export const SITE_URL = 'https://gabrielefantini.github.io';
@@ -164,6 +165,46 @@ export function getRouteMeta(pathname: string): RouteMeta {
         break;
       }
       return page(`Life — ${profile.name}`, `${profile.name} off the clock: notes on things that have nothing to do with software.`);
+    case 'daily': {
+      if (!slug) {
+        return page(
+          `Daily — math and software engineering newspapers — ${profile.name}`,
+          'Two daily newspapers: The Daily Theorem (mathematics, high school to university) and The Daily Commit (software engineering). Topics, exercises and solutions every day, also as PDF.',
+        );
+      }
+      const paper = paperById(slug);
+      if (!paper) break;
+      const sub = path.split('/')[3];
+      if (!sub) return page(`${paper.name} — ${profile.name}`, paper.tagline);
+      if (sub === 'programme') {
+        return page(
+          `${paper.name}: the 2-year programme — ${profile.name}`,
+          syllabusOf(paper.id)?.intro || paper.tagline,
+        );
+      }
+      const issue = issuesOf(paper.id).find((i) => i.date === sub);
+      if (!issue) break;
+      return {
+        title: `${issue.title} — ${paper.name}, ${longDate(issue.date)}`,
+        description: issue.summary || paper.tagline,
+        path,
+        type: 'article',
+        published: issue.date,
+        jsonLd: graph({
+          '@type': 'Article',
+          headline: issue.title,
+          description: issue.summary,
+          datePublished: issue.date,
+          url: `${SITE_URL}${path}`,
+          mainEntityOfPage: `${SITE_URL}${path}`,
+          image: `${SITE_URL}/og.png`,
+          articleSection: paper.name,
+          keywords: issue.topics.join(', '),
+          inLanguage: 'en',
+          author: person,
+        }),
+      };
+    }
   }
 
   return { ...page(`Page not found — ${profile.name}`, DEFAULT_DESCRIPTION), noindex: true, jsonLd: [] };
@@ -181,6 +222,15 @@ export function listRoutes(): { path: string; lastmod?: string }[] {
     { path: '/lab/' },
     { path: '/life/', lastmod: latest(lifePosts) },
     ...lifePosts.map((p) => ({ path: `/life/${p.slug}/`, lastmod: p.date })),
+    { path: '/daily/', lastmod: papers.map((p) => issuesOf(p.id)[0]?.date).filter(Boolean).sort().pop() },
+    ...papers.flatMap((p) => {
+      const issues = issuesOf(p.id);
+      return [
+        { path: `/daily/${p.id}/`, lastmod: issues[0]?.date },
+        { path: `/daily/${p.id}/programme/` },
+        ...issues.map((i) => ({ path: `/daily/${p.id}/${i.date}/`, lastmod: i.date })),
+      ];
+    }),
   ];
 }
 

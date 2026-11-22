@@ -2,6 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot, hydrateRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import '@fontsource-variable/inter';
+import 'katex/dist/katex.min.css';
 import './styles.css';
 import App from './App';
 

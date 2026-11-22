@@ -3,6 +3,10 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  # Daily rebuild just after midnight in Rome (23:30 UTC = 00:30 CET / 01:30 CEST),
+  # so each day's newspaper issue goes live on its date.
+  schedule:
+    - cron: '30 23 * * *'
   workflow_dispatch:
 
 permissions:
@@ -24,6 +28,12 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - uses: actions/cache@v4
+        with:
+          path: .cache/daily-pdf
+          key: daily-pdf-${{ github.run_id }}
+          restore-keys: daily-pdf-
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:

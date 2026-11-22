@@ -1100,3 +1100,428 @@ button {
     grid-template-columns: 1fr;
   }
 }
+
+/* ------------------------------------------------------------------ daily newspapers */
+:root {
+  --serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, 'Times New Roman', serif;
+  /* Figure palette (3Blue1Brown-like: blue, yellow, green, red on a quiet grid). */
+  --fig-1: #2f7fd1;
+  --fig-2: #c99a06;
+  --fig-3: #2f9e5b;
+  --fig-4: #d4503a;
+  --fig-grid: rgba(0, 0, 0, 0.12);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --fig-1: #58c4dd;
+    --fig-2: #ffd34d;
+    --fig-3: #83c167;
+    --fig-4: #fc6255;
+    --fig-grid: rgba(255, 255, 255, 0.14);
+  }
+}
+:root[data-theme='dark'] {
+  --fig-1: #58c4dd;
+  --fig-2: #ffd34d;
+  --fig-3: #83c167;
+  --fig-4: #fc6255;
+  --fig-grid: rgba(255, 255, 255, 0.14);
+}
+
+.print-only {
+  display: none;
+}
+
+.daily-card .card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.daily-card-name {
+  font-family: var(--serif);
+  font-size: clamp(28px, 3.4vw, 38px);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.daily-today {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.daily-today-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  letter-spacing: -0.01em;
+}
+a.daily-today:hover .daily-today-title {
+  color: var(--accent);
+}
+.daily-card-links {
+  display: flex;
+  gap: 20px;
+  font-size: 15px;
+  color: var(--muted);
+}
+.daily-card-links a:hover {
+  color: var(--fg);
+}
+
+.daily-week + .daily-week {
+  margin-top: 48px;
+}
+.daily-week-title {
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+.daily-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+.daily-row {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px;
+  align-items: baseline;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+.daily-row:hover .daily-row-title {
+  color: var(--accent);
+}
+.daily-row-date {
+  font-size: 14px;
+  color: var(--subtle);
+}
+.daily-row-title {
+  font-size: 17px;
+}
+.daily-row-title .badge {
+  margin-left: 8px;
+}
+.daily-row-topics {
+  font-size: 14px;
+}
+@media (max-width: 760px) {
+  .daily-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}
+
+.daily-masthead {
+  max-width: 768px;
+  padding-top: clamp(32px, 5vw, 64px);
+  padding-bottom: 40px;
+}
+.daily-masthead-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+.daily-masthead-top .back-link {
+  margin-bottom: 0;
+}
+.daily-paper-name {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(36px, 7vw, 64px);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-align: center;
+  padding-bottom: 14px;
+  border-bottom: 3px double var(--fg);
+}
+.daily-dateline {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 8px 0;
+  border-bottom: 1px solid var(--fg);
+  margin-bottom: 36px;
+}
+.daily-masthead h1 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(30px, 4.6vw, 48px);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  margin-bottom: 16px;
+}
+.daily-masthead .lead {
+  font-family: var(--serif);
+  font-style: italic;
+}
+.daily-masthead > .badge {
+  display: inline-block;
+  margin-bottom: 16px;
+}
+
+.daily-body,
+.daily-solutions {
+  max-width: 768px;
+}
+.daily-body h2,
+.daily-solutions h2,
+.daily-solutions h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.daily-body h2 {
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.daily-body h2:first-child {
+  margin-top: 0;
+}
+.daily-body blockquote {
+  color: var(--fg);
+  border-left: 3px solid var(--fig-1);
+  background: var(--surface);
+  padding: 14px 18px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.daily-solutions {
+  margin-top: 64px;
+  padding-top: 28px;
+  border-top: 3px double var(--fg);
+}
+.daily-solutions-title {
+  margin-top: 0 !important;
+  font-size: 24px !important;
+}
+.daily-solutions details summary {
+  cursor: pointer;
+}
+.daily-pager {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 72px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+.daily-pager a {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 48%;
+}
+.daily-pager a:hover span:last-child {
+  color: var(--accent);
+}
+.daily-pager-next {
+  text-align: right;
+  margin-left: auto;
+}
+
+/* KaTeX: let wide display math scroll instead of overflowing. */
+.prose .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 0;
+}
+
+/* Hand-drawn figures: inline SVG with semantic classes. */
+.fig {
+  margin: 1.6em 0;
+  text-align: center;
+}
+.fig svg {
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+  overflow: visible;
+  color: var(--fg);
+  font-family: var(--font);
+  font-size: 14px;
+}
+.fig figcaption {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--muted);
+}
+.fig .grid {
+  stroke: var(--fig-grid);
+  stroke-width: 1;
+  fill: none;
+}
+.fig .axis {
+  stroke: currentColor;
+  stroke-width: 1.2;
+  fill: none;
+}
+.fig .s1 { stroke: var(--fig-1); }
+.fig .s2 { stroke: var(--fig-2); }
+.fig .s3 { stroke: var(--fig-3); }
+.fig .s4 { stroke: var(--fig-4); }
+.fig .f1 { fill: var(--fig-1); }
+.fig .f2 { fill: var(--fig-2); }
+.fig .f3 { fill: var(--fig-3); }
+.fig .f4 { fill: var(--fig-4); }
+.fig .fade { opacity: 0.25; }
+.fig .ink { stroke: currentColor; }
+.fig text {
+  fill: currentColor;
+}
+.fig text.t1 { fill: var(--fig-1); }
+.fig text.t2 { fill: var(--fig-2); }
+.fig text.t3 { fill: var(--fig-3); }
+.fig text.t4 { fill: var(--fig-4); }
+
+.daily-phase + .daily-phase {
+  margin-top: 56px;
+}
+.daily-phase-title {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 26px;
+  margin-bottom: 12px;
+}
+.daily-pweek {
+  border-bottom: 1px solid var(--line);
+}
+.daily-pweek summary {
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr) auto;
+  gap: 16px;
+  padding: 12px 0;
+  cursor: pointer;
+  list-style: none;
+}
+.daily-pweek summary::-webkit-details-marker {
+  display: none;
+}
+.daily-pweek.is-current summary {
+  color: var(--accent);
+}
+.daily-pweek-n {
+  font-size: 14px;
+  color: var(--subtle);
+}
+.daily-pweek-date {
+  font-size: 14px;
+}
+.daily-pweek ul {
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 0 0 0 106px;
+}
+.daily-pweek li {
+  padding: 4px 0;
+  color: var(--muted);
+}
+.daily-pweek li a {
+  color: var(--fg);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.daily-pday {
+  display: inline-block;
+  width: 44px;
+  font-size: 13px;
+  color: var(--subtle);
+}
+@media (max-width: 640px) {
+  .daily-pweek summary {
+    grid-template-columns: 70px minmax(0, 1fr);
+  }
+  .daily-pweek-date {
+    display: none;
+  }
+  .daily-pweek ul {
+    padding-left: 0;
+  }
+}
+
+/* ------------------------------------------------------------------ print (PDF) */
+@page {
+  size: A4;
+  margin: 16mm 16mm 18mm;
+}
+@media print {
+  :root,
+  :root[data-theme],
+  :root:not([data-theme='light']) {
+    --bg: #fff;
+    --fg: #111;
+    --muted: #444;
+    --subtle: #666;
+    --line: rgba(0, 0, 0, 0.18);
+    --surface: #f3f3f3;
+    --accent: #111;
+    --fig-1: #2f7fd1;
+    --fig-2: #c99a06;
+    --fig-3: #2f9e5b;
+    --fig-4: #d4503a;
+    --fig-grid: rgba(0, 0, 0, 0.12);
+    color-scheme: light;
+  }
+  .site-header,
+  .site-footer,
+  .skip-link,
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: inline;
+  }
+  .container {
+    padding: 0;
+    max-width: none;
+  }
+  .daily-masthead {
+    padding-top: 0;
+    padding-bottom: 18px;
+  }
+  .daily-paper-name {
+    font-size: 44px;
+  }
+  .daily-masthead h1 {
+    font-size: 30px;
+  }
+  .prose {
+    font-family: var(--serif);
+    font-size: 11.5pt;
+    line-height: 1.5;
+  }
+  .prose h2 {
+    font-size: 17pt;
+    break-after: avoid;
+  }
+  .prose h3 {
+    font-size: 13.5pt;
+    break-after: avoid;
+  }
+  .prose pre {
+    font-size: 9pt;
+    white-space: pre-wrap;
+    break-inside: avoid;
+  }
+  .fig,
+  .prose blockquote,
+  .katex-display,
+  .prose table {
+    break-inside: avoid;
+  }
+  .daily-solutions {
+    margin-top: 28px;
+  }
+  .daily-solutions details > *,
+  .daily-solutions details {
+    display: block;
+  }
+}
